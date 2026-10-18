@@ -73,9 +73,10 @@ public class OrderFacade {
     }
 
     private void rollbackInventory(List<CartItem> reservedItems) {
-        System.out.println("[OrderFacade] Triggering inventory compensation rollback...");
+        System.out.println("[OrderFacade] Initiating inventory compensation rollback...");
         for (CartItem item : reservedItems) {
             inventoryService.releaseStock(item.productId(), item.quantity());
+            System.out.printf("[OrderFacade] Released hold on %s (Qty: %d)%n", item.name(), item.quantity());
         }
     }
 }
